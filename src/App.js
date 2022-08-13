@@ -1,10 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
+import { ChakraProvider, Box } from '@chakra-ui/react';
+import { appTheme } from './styles/Theme'
 
 function App() {
   return (
-    <div>
-    </div>
+    <ChakraProvider theme={appTheme}>
+      <Box bgColor={appTheme.colors.body} minHeight="100vh">
+      </Box>
+    </ChakraProvider>
   );
 }
 
