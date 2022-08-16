@@ -67,6 +67,8 @@ function App() {
           taskList.map((task) => {
             const uncheckedIcon = task.isChecked ? 'none' : ''
             const checkedIcon = task.isChecked ? '' : 'none'
+            const strikeThrough = task.isChecked ? 'line-through' : 'none'
+
             return(
             <li key={task.id} id={task.id} onClick={() => handleClick(task.id)}>
                 <Flex
@@ -78,7 +80,7 @@ function App() {
                   alignItems='center'>
                     <Icon as={BsFillCircleFill} color='#fff' display={uncheckedIcon} />
                     <Icon as={BsCheckCircle} color='#fff' display={checkedIcon} />
-                    <Text ml='0.75rem' color='#fff'>{task.task}</Text>
+                    <Text ml='0.75rem' color='#fff' textDecoration={strikeThrough}>{task.task}</Text>
                 </Flex>
             </li>
             )
