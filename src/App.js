@@ -1,7 +1,8 @@
 import './App.css';
 import React, {useState} from 'react';
-import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text } from '@chakra-ui/react';
+import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text, Icon } from '@chakra-ui/react';
 import { appTheme } from './styles/Theme'
+import { BsFillCircleFill, BsCheckCircle } from 'react-icons/bs'
 
 
 function App() {
@@ -18,13 +19,25 @@ function App() {
 
         const task = {
             id: id,
-            task: input
+            task: input,
+            isChecked: false
         }
 
         setTaskList(oldList => [task, ...oldList])
         setInput('');
         setId(id + 1);
     }
+
+    const handleClick = (id) => {
+      let completed = taskList.map(task => {
+        if (task.id === id) {
+          task.isChecked = !task.isChecked
+        }
+        return task
+      })
+      setTaskList(completed);
+      }
+
   return (
     <ChakraProvider theme={appTheme}>
       <Container>
@@ -52,15 +65,22 @@ function App() {
         <ul>
         {
           taskList.map((task) => {
+            const uncheckedIcon = task.isChecked ? 'none' : ''
+            const checkedIcon = task.isChecked ? '' : 'none'
+            const strikeThrough = task.isChecked ? 'line-through' : 'none'
+
             return(
-            <li key={task.id}>
+            <li key={task.id} id={task.id} onClick={() => handleClick(task.id)}>
                 <Flex
-                  bgColor='#FFF'
+                  bgColor='#8CC0DE'
                   boxShadow='lg'
-                  p='.75rem'
+                  p='0.85rem'
                   mb='1rem'
-                  borderRadius='1.5rem'>
-                    <Text ml='1.25rem'>{task.task}</Text>
+                  borderRadius='1.5rem'
+                  alignItems='center'>
+                    <Icon as={BsFillCircleFill} color='#fff' display={uncheckedIcon} />
+                    <Icon as={BsCheckCircle} color='#fff' display={checkedIcon} />
+                    <Text ml='0.75rem' color='#fff' textDecoration={strikeThrough}>{task.task}</Text>
                 </Flex>
             </li>
             )
