@@ -2,7 +2,7 @@ import './App.css';
 import React, {useState} from 'react';
 import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text, Icon } from '@chakra-ui/react';
 import { appTheme } from './styles/Theme'
-import { BsFillCircleFill, BsCheckCircle } from 'react-icons/bs'
+import { BsFillCircleFill, BsCheckCircle, BsTrash } from 'react-icons/bs'
 
 
 function App() {
@@ -77,10 +77,15 @@ function App() {
                   p='0.85rem'
                   mb='1rem'
                   borderRadius='1.5rem'
-                  alignItems='center'>
-                    <Icon as={BsFillCircleFill} color='#fff' display={uncheckedIcon} />
-                    <Icon as={BsCheckCircle} color='#fff' display={checkedIcon} />
-                    <Text ml='0.75rem' color='#fff' textDecoration={strikeThrough}>{task.task}</Text>
+                  justifyContent='space-between'>
+                    <Flex alignItems='center'>
+                      <Icon as={BsFillCircleFill} color='#fff' display={uncheckedIcon} />
+                      <Icon as={BsCheckCircle} color='#fff' display={checkedIcon} />
+                      <Text ml='0.75rem' color='#fff' textDecoration={strikeThrough}>{task.task}</Text>
+                    </Flex>
+                    <Flex alignItems='center'>
+                      <Icon as={BsTrash}  />
+                    </Flex>
                 </Flex>
             </li>
             )
