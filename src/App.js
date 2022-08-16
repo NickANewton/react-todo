@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useState} from 'react';
-import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text, Icon } from '@chakra-ui/react';
+import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text, Icon, GridItem } from '@chakra-ui/react';
 import { appTheme } from './styles/Theme'
 import { BsFillCircleFill, BsCheckCircle, BsTrash } from 'react-icons/bs'
 
@@ -36,6 +36,11 @@ function App() {
         return task
       })
       setTaskList(completed);
+    }
+
+      const handleDelete = (id) => {
+        const removeDeleted = taskList.filter(task => task.id !== id);
+        setTaskList(removeDeleted);
       }
 
   return (
@@ -84,7 +89,7 @@ function App() {
                       <Text ml='0.75rem' color='#fff' textDecoration={strikeThrough}>{task.task}</Text>
                     </Flex>
                     <Flex alignItems='center'>
-                      <Icon as={BsTrash}  />
+                      <Icon as={BsTrash} onClick={() => handleDelete(task.id)}  />
                     </Flex>
                 </Flex>
             </li>
