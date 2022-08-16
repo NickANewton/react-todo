@@ -1,13 +1,13 @@
 import './App.css';
 import React, {useState} from 'react';
-import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl } from '@chakra-ui/react';
+import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text } from '@chakra-ui/react';
 import { appTheme } from './styles/Theme'
 
 
 function App() {
     const [input, setInput] = useState('');
     const [taskList, setTaskList] = useState([]);
-    const [id, setId] = useState(0);
+    const [id, setId] = useState(1);
 
     const handleChange = (event) => {
         setInput(event.target.value)    
@@ -17,12 +17,13 @@ function App() {
         event.preventDefault()
 
         const task = {
-            id: setId(id + 1),
+            id: id,
             task: input
         }
 
         setTaskList(oldList => [task, ...oldList])
         setInput('');
+        setId(id + 1);
         console.log(taskList);
     }
   return (
@@ -37,7 +38,7 @@ function App() {
         </Heading>
         <form onSubmit={handleSubmit}>
             <FormControl>
-                <Flex mt="2rem">
+                <Flex mt="2rem" mb='2.75rem'>
                     <Input 
                         type="text"
                         bgColor="#FFFFFF" 
@@ -49,6 +50,23 @@ function App() {
                 </Flex>
             </FormControl>
         </form>
+        <ul>
+        {
+          taskList.map((task) => {
+            return(
+            <li key={task.id}>
+                <Flex
+                  bgColor='#FFF'
+                  p='0.5rem'
+                  mb='1rem'
+                  borderRadius='1.5rem'>
+                    <Text ml='1.25rem'>{task.task}</Text>
+                </Flex>
+            </li>
+            )
+          })
+        }
+        </ul>
       </Container>
     </ChakraProvider>
   );
