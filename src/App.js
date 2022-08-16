@@ -55,12 +55,12 @@ function App() {
             return(
             <li key={task.id}>
                 <Flex
-                  bgColor='#FFF'
+                  bgColor='#8CC0DE'
                   boxShadow='lg'
                   p='.75rem'
                   mb='1rem'
                   borderRadius='1.5rem'>
-                    <Text ml='1.25rem'>{task.task}</Text>
+                    <Text ml='1.25rem' color='#fff'>{task.task}</Text>
                 </Flex>
             </li>
             )
