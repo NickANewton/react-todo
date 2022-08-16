@@ -70,7 +70,7 @@ function App() {
             const strikeThrough = task.isChecked ? 'line-through' : 'none'
 
             return(
-            <li key={task.id} id={task.id} onClick={() => handleClick(task.id)}>
+            <li key={task.id} id={task.id}>
                 <Flex
                   bgColor='#8CC0DE'
                   boxShadow='lg'
@@ -78,7 +78,7 @@ function App() {
                   mb='1rem'
                   borderRadius='1.5rem'
                   justifyContent='space-between'>
-                    <Flex alignItems='center'>
+                    <Flex alignItems='center' onClick={() => handleClick(task.id)}>
                       <Icon as={BsFillCircleFill} color='#fff' display={uncheckedIcon} />
                       <Icon as={BsCheckCircle} color='#fff' display={checkedIcon} />
                       <Text ml='0.75rem' color='#fff' textDecoration={strikeThrough}>{task.task}</Text>
