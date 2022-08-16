@@ -1,8 +1,8 @@
 import './App.css';
 import React, {useState} from 'react';
-import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text, Icon } from '@chakra-ui/react';
+import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text, Icon, GridItem } from '@chakra-ui/react';
 import { appTheme } from './styles/Theme'
-import { BsFillCircleFill, BsCheckCircle } from 'react-icons/bs'
+import { BsFillCircleFill, BsCheckCircle, BsTrash } from 'react-icons/bs'
 
 
 function App() {
@@ -36,6 +36,11 @@ function App() {
         return task
       })
       setTaskList(completed);
+    }
+
+      const handleDelete = (id) => {
+        const removeDeleted = taskList.filter(task => task.id !== id);
+        setTaskList(removeDeleted);
       }
 
   return (
@@ -70,17 +75,22 @@ function App() {
             const strikeThrough = task.isChecked ? 'line-through' : 'none'
 
             return(
-            <li key={task.id} id={task.id} onClick={() => handleClick(task.id)}>
+            <li key={task.id} id={task.id}>
                 <Flex
                   bgColor='#8CC0DE'
                   boxShadow='lg'
                   p='0.85rem'
                   mb='1rem'
                   borderRadius='1.5rem'
-                  alignItems='center'>
-                    <Icon as={BsFillCircleFill} color='#fff' display={uncheckedIcon} />
-                    <Icon as={BsCheckCircle} color='#fff' display={checkedIcon} />
-                    <Text ml='0.75rem' color='#fff' textDecoration={strikeThrough}>{task.task}</Text>
+                  justifyContent='space-between'>
+                    <Flex alignItems='center' onClick={() => handleClick(task.id)}>
+                      <Icon as={BsFillCircleFill} color='#fff' display={uncheckedIcon} />
+                      <Icon as={BsCheckCircle} color='#fff' display={checkedIcon} />
+                      <Text ml='0.75rem' color='#fff' textDecoration={strikeThrough}>{task.task}</Text>
+                    </Flex>
+                    <Flex alignItems='center'>
+                      <Icon as={BsTrash} onClick={() => handleDelete(task.id)}  />
+                    </Flex>
                 </Flex>
             </li>
             )
