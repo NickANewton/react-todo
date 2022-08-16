@@ -56,7 +56,8 @@ function App() {
             <li key={task.id}>
                 <Flex
                   bgColor='#FFF'
-                  p='0.5rem'
+                  boxShadow='lg'
+                  p='.75rem'
                   mb='1rem'
                   borderRadius='1.5rem'>
                     <Text ml='1.25rem'>{task.task}</Text>
