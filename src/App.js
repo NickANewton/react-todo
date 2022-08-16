@@ -1,7 +1,8 @@
 import './App.css';
 import React, {useState} from 'react';
-import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text } from '@chakra-ui/react';
+import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text, Icon } from '@chakra-ui/react';
 import { appTheme } from './styles/Theme'
+import { BsFillCircleFill, BsCheckCircle } from 'react-icons/bs'
 
 
 function App() {
@@ -57,10 +58,13 @@ function App() {
                 <Flex
                   bgColor='#8CC0DE'
                   boxShadow='lg'
-                  p='.75rem'
+                  p='0.85rem'
                   mb='1rem'
-                  borderRadius='1.5rem'>
-                    <Text ml='1.25rem' color='#fff'>{task.task}</Text>
+                  borderRadius='1.5rem'
+                  alignItems='center'>
+                    <Icon as={BsFillCircleFill} color='#fff' display='' />
+                    <Icon as={BsCheckCircle} color='#fff' display='none'/>
+                    <Text ml='0.75rem' color='#fff'>{task.task}</Text>
                 </Flex>
             </li>
             )
