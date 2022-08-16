@@ -24,7 +24,6 @@ function App() {
         setTaskList(oldList => [task, ...oldList])
         setInput('');
         setId(id + 1);
-        console.log(taskList);
     }
   return (
     <ChakraProvider theme={appTheme}>
