@@ -9,7 +9,6 @@ import jsonData from '../src/data/data.json'
 function App() {
     const [input, setInput] = useState('');
     const [taskList, setTaskList] = useState([]);
-    const [id, setId] = useState(4);
     const [filterText, setFilterText] = useState('All');
     const [filteredTasks, setFilteredTasks] = useState([]);
 
@@ -38,14 +37,13 @@ function App() {
         event.preventDefault()
 
         const task = {
-            id: id,
+            id: Math.floor(Math.random() * 1000),
             task: input,
             isChecked: false
         }
 
         setTaskList(oldList => [task, ...oldList])
         setInput('');
-        setId(id + 1);
     }
 
     const handleClick = (id) => {
@@ -61,6 +59,11 @@ function App() {
       const handleDelete = (id) => {
         const removeDeleted = taskList.filter(task => task.id !== id);
         setTaskList(removeDeleted);
+      }
+
+      const handleRemoveCompleted = () => {
+        const removeCompleted = taskList.filter(task => task.isChecked !== true);
+        setTaskList(removeCompleted);
       }
 
       const handleFilterText = (event) => {
@@ -147,9 +150,9 @@ function App() {
             </li>
         }
         </ul>
-        { filteredTasks.length > 0 ?
+        { filteredTasks.length > 0 && filterText === 'Completed' ?
         <Flex justifyContent='center'>
-          <Button mt='2rem' bgColor='#F4D19B' color='#fff' _hover={{bgColor: '#F29191'}}>Remove Completed Tasks</Button>
+          <Button onClick={handleRemoveCompleted} mt='2rem' bgColor='#F4D19B' color='#fff' _hover={{bgColor: '#F29191'}}>Remove Completed Tasks</Button>
         </Flex>
         : null
         }
