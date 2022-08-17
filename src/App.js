@@ -1,9 +1,9 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
 import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Text, Icon } from '@chakra-ui/react';
-import { appTheme } from './styles/Theme'
-import { BsFillCircleFill, BsCheckCircle, BsTrash } from 'react-icons/bs'
-import jsonData from '../src/data/data.json'
+import { appTheme } from './styles/Theme';
+import { BsFillCircleFill, BsCheckCircle, BsTrash } from 'react-icons/bs';
+import jsonData from '../src/data/data.json';
 
 
 function App() {
@@ -14,10 +14,10 @@ function App() {
 
     useEffect(() => {
       if (localStorage.getItem('task-list') === null) {
-        setTaskList(jsonData)
+        setTaskList(jsonData);
       } else {
         let tasksLocal = JSON.parse(localStorage.getItem('task-list'))
-        setTaskList(tasksLocal)
+        setTaskList(tasksLocal);
       }
     }, [])
 
@@ -30,11 +30,11 @@ function App() {
     }, [taskList, filterText])
 
     const handleChange = (event) => {
-        setInput(event.target.value)    
+        setInput(event.target.value);    
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
         const task = {
             id: Math.floor(Math.random() * 1000),
@@ -42,7 +42,7 @@ function App() {
             isChecked: false
         }
 
-        setTaskList(oldList => [task, ...oldList])
+        setTaskList(oldList => [task, ...oldList]);
         setInput('');
     }
 
@@ -67,15 +67,16 @@ function App() {
       }
 
       const handleFilterText = (event) => {
-        if (event.target.nodeName === 'P')
+        if (event.target.nodeName === 'P') {
         setFilterText(event.target.textContent)
+        }
       }
 
       const handleFilteredTasks = () => {
         if (filterText === 'Active') {
-          setFilteredTasks(taskList.filter(task => task.isChecked === false))
+          setFilteredTasks(taskList.filter(task => task.isChecked === false));
         } else if (filterText === 'Completed') {
-          setFilteredTasks(taskList.filter(task => task.isChecked === true))
+          setFilteredTasks(taskList.filter(task => task.isChecked === true));
         } else if (filterText === 'All') {
           setFilteredTasks(taskList);
         }
@@ -87,7 +88,7 @@ function App() {
         <Heading 
           textAlign='center' 
           fontFamily={appTheme.fonts.family.laBelle} 
-          fontSize={appTheme.fonts.size.heading}
+          fontSize='3.5rem'
           mt="2.5rem">  
           Today's Tasks
         </Heading>
@@ -145,15 +146,25 @@ function App() {
           }) 
           : <li>
               <Flex justifyContent='center'>
-                <Text>{filterText === 'All' ? 'No tasks listed, please add a task.' : `You have no ${filterText} tasks.`}</Text>
+                <Text>
+                  {filterText === 'All' ? 'No tasks listed, please add a task.' : `You have no ${filterText} tasks.`}
+                </Text>
               </Flex>
             </li>
         }
         </ul>
         { filteredTasks.length > 0 && filterText === 'Completed' ?
-        <Flex justifyContent='center'>
-          <Button onClick={handleRemoveCompleted} mt='2rem' bgColor='#F4D19B' color='#fff' _hover={{bgColor: '#F29191'}}>Remove Completed Tasks</Button>
-        </Flex>
+        <form onClick={handleRemoveCompleted}>
+          <Flex justifyContent='center'>
+            <Button  
+              mt='2rem' 
+              bgColor='#F4D19B' 
+              color='#fff' 
+              _hover={{bgColor: '#F29191'}}>
+              Remove Completed Tasks
+            </Button>
+          </Flex>
+         </form>
         : null
         }
       </Container>
