@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
-import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text, Icon, GridItem } from '@chakra-ui/react';
+import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Text, Icon } from '@chakra-ui/react';
 import { appTheme } from './styles/Theme'
 import { BsFillCircleFill, BsCheckCircle, BsTrash } from 'react-icons/bs'
 
@@ -101,7 +101,7 @@ function App() {
           <Text color={filterText === 'Completed' ? '#000' : '#A0AEC0'}>Completed</Text>
         </Flex>
         <ul>
-        {
+        { filteredTasks.length > 0 ?
           filteredTasks.map((task) => {
             const uncheckedIcon = task.isChecked ? 'none' : ''
             const checkedIcon = task.isChecked ? '' : 'none'
@@ -128,6 +128,11 @@ function App() {
             </li>
             )
           })
+          : <li>
+              <Flex justifyContent='center'>
+                <Text>{filterText === 'All' ? 'No tasks listed, please add a task.' : `You have no ${filterText} tasks.`}</Text>
+              </Flex>
+            </li>
         }
         </ul>
       </Container>
@@ -136,3 +141,4 @@ function App() {
 }
 
 export default App;
+
