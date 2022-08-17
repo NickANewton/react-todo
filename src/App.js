@@ -98,7 +98,7 @@ function App() {
                         placeholder="What needs to be done?"
                         value={input}
                         onChange={handleChange} />
-                    <Button bgColor="#B1D19B" color="#FFFFFF">ADD</Button>
+                    <Button bgColor="#B1D19B" color="#FFFFFF" _hover={{bgColor: '#70AF85'}}>ADD</Button>
                 </Flex>
             </FormControl>
         </form>
@@ -108,9 +108,9 @@ function App() {
           fontSize='1.5rem'
           mb='1rem'
           onClick={handleFilterText}>
-          <Text color={filterText === 'All' ? '#000' : '#A0AEC0'}>All</Text>
-          <Text color={filterText === 'Active' ? '#000' : '#A0AEC0'}>Active</Text>
-          <Text color={filterText === 'Completed' ? '#000' : '#A0AEC0'}>Completed</Text>
+          <Text color={filterText === 'All' ? '#000' : '#A0AEC0'} cursor='pointer'>All</Text>
+          <Text color={filterText === 'Active' ? '#000' : '#A0AEC0'} cursor='pointer'>Active</Text>
+          <Text color={filterText === 'Completed' ? '#000' : '#A0AEC0'} cursor='pointer'>Completed</Text>
         </Flex>
         <ul>
         { filteredTasks.length > 0 ?
@@ -129,17 +129,17 @@ function App() {
                   borderRadius='1.5rem'
                   justifyContent='space-between'>
                     <Flex alignItems='center' onClick={() => handleClick(task.id)}>
-                      <Icon as={BsFillCircleFill} color='#fff' display={uncheckedIcon} />
-                      <Icon as={BsCheckCircle} color='#fff' display={checkedIcon} />
-                      <Text ml='0.75rem' color='#fff' textDecoration={strikeThrough}>{task.task}</Text>
+                      <Icon as={BsFillCircleFill} color='#fff' display={uncheckedIcon} cursor='pointer' />
+                      <Icon as={BsCheckCircle} color='#fff' display={checkedIcon} cursor='pointer' />
+                      <Text ml='0.75rem' color='#fff' textDecoration={strikeThrough} cursor='pointer'>{task.task}</Text>
                     </Flex>
                     <Flex alignItems='center'>
-                      <Icon as={BsTrash} onClick={() => handleDelete(task.id)}  />
+                      <Icon as={BsTrash} onClick={() => handleDelete(task.id)} cursor='pointer'  />
                     </Flex>
                 </Flex>
             </li>
             )
-          })
+          }) 
           : <li>
               <Flex justifyContent='center'>
                 <Text>{filterText === 'All' ? 'No tasks listed, please add a task.' : `You have no ${filterText} tasks.`}</Text>
@@ -147,6 +147,12 @@ function App() {
             </li>
         }
         </ul>
+        { filteredTasks.length > 0 ?
+        <Flex justifyContent='center'>
+          <Button mt='2rem' bgColor='#F4D19B' color='#fff' _hover={{bgColor: '#F29191'}}>Remove Completed Tasks</Button>
+        </Flex>
+        : null
+        }
       </Container>
     </ChakraProvider>
   );
