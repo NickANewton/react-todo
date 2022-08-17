@@ -95,13 +95,13 @@ function App() {
           fontSize='1.5rem'
           mb='1rem'
           onClick={handleFilterText}>
-          <Text>All</Text>
-          <Text color='#A0AEC0'>Active</Text>
-          <Text color='#A0AEC0'>Completed</Text>
+          <Text color={filterText === 'All' ? '#000' : '#A0AEC0'}>All</Text>
+          <Text color={filterText === 'Active' ? '#000' : '#A0AEC0'}>Active</Text>
+          <Text color={filterText === 'Completed' ? '#000' : '#A0AEC0'}>Completed</Text>
         </Flex>
         <ul>
         {
-          taskList.map((task) => {
+          filteredTasks.map((task) => {
             const uncheckedIcon = task.isChecked ? 'none' : ''
             const checkedIcon = task.isChecked ? '' : 'none'
             const strikeThrough = task.isChecked ? 'line-through' : 'none'
