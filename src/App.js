@@ -14,8 +14,17 @@ function App() {
     const [filteredTasks, setFilteredTasks] = useState([]);
 
     useEffect(() => {
-      setTaskList(jsonData)
+      if (localStorage.getItem('task-list') === null) {
+        setTaskList(jsonData)
+      } else {
+        let tasksLocal = JSON.parse(localStorage.getItem('task-list'))
+        setTaskList(tasksLocal)
+      }
     }, [])
+
+    useEffect(() => {
+      localStorage.setItem('task-list', JSON.stringify(taskList))
+    }, [taskList])
 
     useEffect(() => {
       handleFilteredTasks();
