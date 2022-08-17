@@ -52,6 +52,7 @@ function App() {
       }
 
       const handleFilterText = (event) => {
+        if (event.target.nodeName === 'P')
         setFilterText(event.target.textContent)
       }
 
