@@ -1,0 +1,17 @@
+[
+        {
+            "id": 1,
+            "task": "Clean room",
+            "isChecked": false
+        }, 
+        {
+            "id": 2,
+            "task": "Code",
+            "isChecked": false 
+        },
+        {
+            "id": 3,
+            "task": "Relax",
+            "isChecked": false 
+        }
+]

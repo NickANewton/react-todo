@@ -3,20 +3,23 @@ import React, {useEffect, useState} from 'react';
 import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Text, Icon } from '@chakra-ui/react';
 import { appTheme } from './styles/Theme'
 import { BsFillCircleFill, BsCheckCircle, BsTrash } from 'react-icons/bs'
+import jsonData from '../src/data/data.json'
 
 
 function App() {
     const [input, setInput] = useState('');
     const [taskList, setTaskList] = useState([]);
-    const [id, setId] = useState(1);
+    const [id, setId] = useState(4);
     const [filterText, setFilterText] = useState('All');
     const [filteredTasks, setFilteredTasks] = useState([]);
 
+    useEffect(() => {
+      setTaskList(jsonData)
+    }, [])
 
-  useEffect(() => {
-    handleFilteredTasks();
-  }, [taskList, filterText])
-
+    useEffect(() => {
+      handleFilteredTasks();
+    }, [taskList, filterText])
 
     const handleChange = (event) => {
         setInput(event.target.value)    
