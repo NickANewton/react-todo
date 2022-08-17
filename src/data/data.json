@@ -1,5 +1,5 @@
-{ 
-    "tasks": [{
+[
+        {
             "id": 1,
             "task": "Clean room",
             "isChecked": false
@@ -14,5 +14,4 @@
             "task": "Relax",
             "isChecked": false 
         }
-    ]
-}
+]
