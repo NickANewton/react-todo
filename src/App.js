@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
-import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Text, Icon } from '@chakra-ui/react';
+import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Text, Icon, FormErrorMessage } from '@chakra-ui/react';
 import { appTheme } from './styles/Theme';
 import { BsFillCircleFill, BsCheckCircle, BsTrash } from 'react-icons/bs';
 import jsonData from '../src/data/data.json';
@@ -96,13 +96,14 @@ function App() {
             <FormControl>
                 <Flex mt="2rem" mb='2.75rem'>
                     <Input 
+                        isRequired
                         type="text"
                         bgColor="#FFFFFF" 
                         mr="0.75rem"
                         placeholder="What needs to be done?"
                         value={input}
-                        onChange={handleChange} />
-                    <Button bgColor="#B1D19B" color="#FFFFFF" _hover={{bgColor: '#70AF85'}}>ADD</Button>
+                        onChange={handleChange} /> 
+                    <Button type='submit' bgColor="#B1D19B" color="#FFFFFF" _hover={{bgColor: '#70AF85'}}>ADD</Button>
                 </Flex>
             </FormControl>
         </form>
