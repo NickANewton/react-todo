@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { ChakraProvider, Heading, Container, Flex, Input, Button, FormControl, Box, Text, Icon, GridItem } from '@chakra-ui/react';
 import { appTheme } from './styles/Theme'
 import { BsFillCircleFill, BsCheckCircle, BsTrash } from 'react-icons/bs'
@@ -9,6 +9,14 @@ function App() {
     const [input, setInput] = useState('');
     const [taskList, setTaskList] = useState([]);
     const [id, setId] = useState(1);
+    const [filterText, setFilterText] = useState('All');
+    const [filteredTasks, setFilteredTasks] = useState([]);
+
+
+  useEffect(() => {
+    handleFilteredTasks();
+  }, [taskList, filterText])
+
 
     const handleChange = (event) => {
         setInput(event.target.value)    
@@ -43,6 +51,20 @@ function App() {
         setTaskList(removeDeleted);
       }
 
+      const handleFilterText = (event) => {
+        setFilterText(event.target.textContent)
+      }
+
+      const handleFilteredTasks = () => {
+        if (filterText === 'Active') {
+          setFilteredTasks(taskList.filter(task => task.isChecked === false))
+        } else if (filterText === 'Completed') {
+          setFilteredTasks(taskList.filter(task => task.isChecked === true))
+        } else if (filterText === 'All') {
+          setFilteredTasks(taskList);
+        }
+      }
+
   return (
     <ChakraProvider theme={appTheme}>
       <Container>
@@ -67,6 +89,16 @@ function App() {
                 </Flex>
             </FormControl>
         </form>
+        <Flex 
+          justifyContent='space-around' 
+          fontFamily={appTheme.fonts.family.laBelle} 
+          fontSize='1.5rem'
+          mb='1rem'
+          onClick={handleFilterText}>
+          <Text>All</Text>
+          <Text color='#A0AEC0'>Active</Text>
+          <Text color='#A0AEC0'>Completed</Text>
+        </Flex>
         <ul>
         {
           taskList.map((task) => {
